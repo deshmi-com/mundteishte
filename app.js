@@ -1966,8 +1966,8 @@
 
     return `
     <header style="position:sticky;top:0;z-index:30;backdrop-filter:blur(14px);background:rgba(14,14,16,0.82);border-bottom:1px solid rgba(255,255,255,0.07);">
-      <div style="max-width:1240px;margin:0 auto;padding:13px clamp(16px,4vw,28px);display:flex;align-items:center;gap:18px;justify-content:space-between;">
-        <button data-go="home" style="flex:none;display:flex;align-items:center;gap:10px;background:none;border:none;cursor:pointer;padding:0;text-align:left;">
+      <div class="head-row" style="max-width:1240px;margin:0 auto;padding:13px clamp(16px,4vw,28px);display:flex;align-items:center;gap:18px;justify-content:space-between;">
+        <button data-go="home" class="head-brand" style="flex:none;display:flex;align-items:center;gap:10px;background:none;border:none;cursor:pointer;padding:0;text-align:left;">
           <span style="width:34px;height:34px;flex:none;border-radius:9px;background:linear-gradient(150deg,#d23b3b,#7a2222);display:flex;align-items:center;justify-content:center;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V8l7-5 7 5v13"></path><path d="M9 21v-6h6v6"></path></svg>
           </span>
@@ -1976,7 +1976,7 @@
             <span class="hide-sm" style="font-size:10.5px;font-weight:600;color:#8b8d93;letter-spacing:0.01em;">Para publike vs. çfarë i duhej Shqipërisë</span>
           </span>
         </button>
-        <nav class="no-scrollbar" style="display:flex;gap:4px;overflow-x:auto;min-width:0;padding:2px;margin:-2px;">
+        <nav class="no-scrollbar head-nav" style="display:flex;gap:4px;overflow-x:auto;min-width:0;padding:2px;margin:-2px;">
           ${navBtns}
         </nav>
       </div>
@@ -2254,9 +2254,9 @@
       : "";
 
     const cards = catalog.map((b) => `
-      <div style="background:#15171a;border:1px solid rgba(74,157,91,0.18);border-radius:18px;padding:22px;">
+      <div class="calc-card" style="background:#15171a;border:1px solid rgba(74,157,91,0.18);border-radius:18px;padding:22px;">
         <div style="color:#56b06a;margin-bottom:14px;">${iconSvg(b.icon, 24, "currentColor")}</div>
-        <div style="font-family:'Spectral',serif;font-weight:700;font-size:clamp(1.9rem,4.4vw,2.6rem);color:#8ed29c;line-height:1;" class="tnum">${esc(b.count)}</div>
+        <div class="calc-num tnum" style="font-family:'Spectral',serif;font-weight:700;font-size:clamp(1.9rem,4.4vw,2.6rem);color:#8ed29c;line-height:1;">${esc(b.count)}</div>
         <div style="font-size:14px;color:#d9d7d0;font-weight:500;margin-top:9px;line-height:1.3;">${esc(b.label)}</div>
         <div style="font-size:11.5px;color:#7e8086;margin-top:6px;">≈ ${esc(b.unitFmt)} ${esc(b.unitSuffix)}</div>
       </div>`).join("");
@@ -2281,7 +2281,7 @@
       </div>
 
       <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 11px;border-radius:100px;font-size:11.5px;font-weight:600;letter-spacing:0.03em;color:#56b06a;background:rgba(74,157,91,0.13);border:1px solid rgba(74,157,91,0.28);margin-bottom:18px;">Krahasim ilustrues</div>
-      <div id="calcCatalog" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:13px;margin-bottom:30px;">
+      <div id="calcCatalog" class="calc-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:13px;margin-bottom:30px;">
         ${cards}
       </div>
 
@@ -2407,9 +2407,9 @@
     if (catEl) {
       const catalog = buildCounts(state.calc);
       catEl.innerHTML = catalog.map((b) => `
-        <div style="background:#15171a;border:1px solid rgba(74,157,91,0.18);border-radius:18px;padding:22px;">
+        <div class="calc-card" style="background:#15171a;border:1px solid rgba(74,157,91,0.18);border-radius:18px;padding:22px;">
           <div style="color:#56b06a;margin-bottom:14px;">${iconSvg(b.icon, 24, "currentColor")}</div>
-          <div style="font-family:'Spectral',serif;font-weight:700;font-size:clamp(1.9rem,4.4vw,2.6rem);color:#8ed29c;line-height:1;" class="tnum">${esc(b.count)}</div>
+          <div class="calc-num tnum" style="font-family:'Spectral',serif;font-weight:700;font-size:clamp(1.9rem,4.4vw,2.6rem);color:#8ed29c;line-height:1;">${esc(b.count)}</div>
           <div style="font-size:14px;color:#d9d7d0;font-weight:500;margin-top:9px;line-height:1.3;">${esc(b.label)}</div>
           <div style="font-size:11.5px;color:#7e8086;margin-top:6px;">≈ ${esc(b.unitFmt)} ${esc(b.unitSuffix)}</div>
         </div>`).join("");

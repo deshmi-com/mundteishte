@@ -56,9 +56,19 @@
     h1, h2, h3, p { overflow-wrap: break-word; }
     @media (max-width: 520px) { .hide-sm { display: none !important; } }
     .chips-toggle { display: none; }
+    @media (max-width: 600px) {
+      /* Header: stack menu below a centered brand so all items are visible */
+      .head-row { flex-direction: column; gap: 12px !important; justify-content: center !important; }
+      .head-brand { align-self: center; }
+      .head-nav { width: 100%; justify-content: center; flex-wrap: wrap; overflow-x: visible !important; }
+    }
     @media (max-width: 520px) {
       .calc-chips:not(.chips-expanded) .calc-chip-extra { display: none; }
       .chips-toggle { display: inline-flex; }
+      /* Comparison cards: smaller so more fit on screen */
+      .calc-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 9px !important; }
+      .calc-card { padding: 14px !important; border-radius: 14px !important; }
+      .calc-num { font-size: 1.65rem !important; }
     }
   </style>
   <script type="application/ld+json">
