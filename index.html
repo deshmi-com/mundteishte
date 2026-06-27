@@ -55,6 +55,11 @@
     img, svg { max-width: 100%; }
     h1, h2, h3, p { overflow-wrap: break-word; }
     @media (max-width: 520px) { .hide-sm { display: none !important; } }
+    .chips-toggle { display: none; }
+    @media (max-width: 520px) {
+      .calc-chips:not(.chips-expanded) .calc-chip-extra { display: none; }
+      .chips-toggle { display: inline-flex; }
+    }
   </style>
   <script type="application/ld+json">
   {

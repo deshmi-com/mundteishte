@@ -2243,9 +2243,15 @@
 
   function screenCalc() {
     const catalog = buildCounts(state.calc);
-    const chips = cases.filter((c) => c.buildable !== false).map((c) =>
-      `<button data-setcalc="${c.value}" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.13);color:#cfd1d6;border-radius:100px;padding:8px 14px;font-family:'Hanken Grotesk';font-size:13px;font-weight:600;cursor:pointer;">${esc(c.shortTitle)}</button>`
+    const chipCases = cases.filter((c) => c.buildable !== false);
+    const CHIP_VISIBLE = 3;
+    const chips = chipCases.map((c, i) =>
+      `<button data-setcalc="${c.value}"${i >= CHIP_VISIBLE ? ' class="calc-chip-extra"' : ""} style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.13);color:#cfd1d6;border-radius:100px;padding:8px 14px;font-family:'Hanken Grotesk';font-size:13px;font-weight:600;cursor:pointer;">${esc(c.shortTitle)}</button>`
     ).join("");
+    const extraChips = Math.max(0, chipCases.length - CHIP_VISIBLE);
+    const chipToggle = extraChips > 0
+      ? `<button data-toggle-chips data-extra="${extraChips}" class="chips-toggle" style="align-items:center;background:rgba(74,157,91,0.13);border:1px solid rgba(74,157,91,0.3);color:#8ed29c;border-radius:100px;padding:8px 14px;font-family:'Hanken Grotesk';font-size:13px;font-weight:700;cursor:pointer;">+${extraChips} të tjera</button>`
+      : "";
 
     const cards = catalog.map((b) => `
       <div style="background:#15171a;border:1px solid rgba(74,157,91,0.18);border-radius:18px;padding:22px;">
@@ -2270,7 +2276,7 @@
 
         <div style="margin-top:22px;">
           <div style="font-size:12px;color:#7e8086;margin-bottom:10px;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;">Kërce te një rast</div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;">${chips}</div>
+          <div class="calc-chips" style="display:flex;flex-wrap:wrap;gap:8px;">${chips}${chipToggle}</div>
         </div>
       </div>
 
@@ -2423,6 +2429,14 @@
         const range = document.getElementById("calcRange");
         if (range) range.value = v;
         updateCalc(v);
+      });
+    });
+    document.querySelectorAll("[data-toggle-chips]").forEach((el) => {
+      el.addEventListener("click", () => {
+        const wrap = el.closest(".calc-chips");
+        if (!wrap) return;
+        const expanded = wrap.classList.toggle("chips-expanded");
+        el.textContent = expanded ? "Më pak" : "+" + el.getAttribute("data-extra") + " të tjera";
       });
     });
     const range = document.getElementById("calcRange");
