@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://deshmi-com.github.io/mundteishte/sitemap.xml
